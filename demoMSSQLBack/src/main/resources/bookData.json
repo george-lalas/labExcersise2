@@ -1,0 +1,52 @@
+[
+  {
+    "language": "Java",
+    "bookTitle": "Java, How To Program 11th edition",
+    "price": 85.3
+  },
+  {
+    "language": "Java",
+    "bookTitle": "Java 8 In action",
+    "price": 55.6
+  },
+  {
+    "language": "C",
+    "bookTitle": "The C Programming Language",
+    "price": 35.80
+  },
+  {
+    "language": "C",
+    "bookTitle": "Practical C Programming",
+    "price": 40.78
+  },
+  {
+    "language": "Python",
+    "bookTitle": "Think Python",
+    "price": 28.95
+  },
+  {
+    "language": "Python",
+    "bookTitle": "Essesential Reference",
+    "price": 37.0
+  },
+  {
+    "language": "Python",
+    "bookTitle": "Learn Python The Hard Way",
+    "price": 33.99
+  },
+  {
+    "language": "JavaScript",
+    "bookTitle": "JavaScript: The Good Parts",
+    "price": 26.53
+  },
+  {
+    "language": "JavaScript",
+    "bookTitle": "Effective JavaScript",
+    "price": 48.75
+  },
+  {
+    "language": "JavaScript",
+    "bookTitle": "JavaScript The Definitive Guide",
+    "price": 63.99
+  }
+]

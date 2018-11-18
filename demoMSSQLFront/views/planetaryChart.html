@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>ACME's AWESOME DASHBOARD</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">ACME's AWESOME DASHBOARD</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="min-height: 500px">
+
+    <div class="starter-template">
+        <h1>Planetary Data Charts</h1>
+    </div>
+
+    <canvas id="chartContainer" style="height: 370px; width: 100%;"></canvas>
+
+
+    <a href="/views/index.html">back to main page</a>
+
+</div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $.ajax({
+            url: "http:/localhost:9085/getPlanets",
+            method: "GET",
+            success: function(data) {
+                console.log(data);
+                Chart.defaults.global.defaultFontFamily = "Lato";
+                Chart.defaults.global.defaultFontSize = 18;
+                var planetNames = [];
+                var gravityData = [];
+                var densityData=[];
+
+                for(var i in data) {
+                    planetNames.push(data[i].planetName);
+                    gravityData.push(data[i].gravityData);
+                    densityData.push(data[i].densityData);
+                }
+
+                console.log('Planet names : ' + planetNames);
+                console.log('Gravity data : ' + gravityData);
+                console.log('Density data : ' + densityData);
+
+                densityData = {
+                    label: 'Density of Planet (kg/m3)',
+                    data: densityData,
+                    backgroundColor: 'rgba(0, 99, 132, 0.6)',
+                    borderWidth: 0,
+                    yAxisID: "y-axis-density"
+                };
+
+                gravityData = {
+                    label: 'Gravity of Planet (m/s2)',
+                    data: gravityData,
+                    backgroundColor: 'rgba(99, 132, 0, 0.6)',
+                    borderWidth: 0,
+                    yAxisID: "y-axis-gravity"
+                };
+
+                planetNames = {
+                    labels: planetNames,
+                    datasets: [densityData, gravityData]
+                };
+
+                var chartOptions = {
+                    scales: {
+                        xAxes: [{
+                            barPercentage: 1,
+                            categoryPercentage: 0.6
+                        }],
+                        yAxes: [{
+                            id: "y-axis-density"
+                        }, {
+                            id: "y-axis-gravity"
+                        }]
+                    }
+                };
+
+
+                var ctx = $('#chartContainer');
+
+                var barGraph = new Chart(ctx, {
+                    type: 'bar',
+                    data: planetNames,
+                    options: chartOptions
+                });
+            },
+            error: function(data) {
+                console.log(data);
+            }
+        });
+    });
+</script>
+</html>
+
